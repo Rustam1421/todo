@@ -9,7 +9,7 @@ Route::get('/', function () {
 Auth::routes();
 
 
-Route::get('/home', 'HomeController@index')->name('home');
+Route::get('/home', 'HomeController@index')->name('home')->middleware('role:user');
 
 Route::get('/search', 'HomeController@search')->name('search');
 
@@ -25,8 +25,10 @@ Route::get('/home/category/{category}', 'HomeController@index')->name('home.cate
 Route::post('/addTodo', 'HomeController@addTodo')->name('add');
 Route::delete('/todoDelete/{todo}', 'HomeController@destroy')->name('deleteTodo');
 
-Route::get('/admin/{id}', 'HomeController@deleteUser')->name('deleteUser');
+Route::delete('/admin/{id}', 'HomeController@deleteUser')->name('deleteUser');
 
 
 
 Route::put('/todo/{id}', 'HomeController@update')->name('update');
+
+Route::put('/admin/{id}', 'AdminController@storeUser')->name('storeUser');

@@ -120,8 +120,10 @@ class HomeController extends Controller
 
     public function adminPageView()
     {
-        $users = User::get();
-        return view('admin', compact('users'));
+        return view('admin', [
+            'users' => User::role('user')->get(),
+            'roles' => Role::get()
+        ]);
     }
 
     public function deleteUser($id)
